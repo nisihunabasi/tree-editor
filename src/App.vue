@@ -4,9 +4,16 @@
       <!-- なんかアイコンを足したい。。。 -->
       Tree Editor
     </h1>
-    <p class="my-6 mx-4">テキストベースのフォルダツリーをイチから簡単に書けるエディタです。</p>
+    <p class="my-6 mx-4">
+      テキストベースのフォルダツリーをイチから簡単に書けるエディタです。<br>
+      タブでインデントしたテキストを、ツリー文字列に変換します。（以下の入力フォームにはタブが打ち込めるようになっています。）
+    </p>
     <div class="my-6 text-center">
-      <textarea cols="30" rows="10" class="p-4 ring-1 ring-gray-400 focus:ring-2 focus:ring-gray-800 focus:outline-none" @keydown="onPressIfTabkey" @input="onInputText"></textarea>
+      <textarea cols="30" rows="10" 
+        class="p-4 ring-1 ring-gray-400 focus:ring-2 focus:ring-gray-800 focus:outline-none" 
+        @keydown="onPressIfTabkey" 
+        @input="onInputText" 
+        placeholder="please input your tree."></textarea>
       <span class="align-middle">=></span>
       <textarea cols="30" rows="10" disabled :value="result"></textarea>
     </div>
@@ -25,7 +32,7 @@ export default {
   props: {
   },
   setup() {
-    const result = ref("hogehoge");
+    const result = ref("Result here.");
     //TODO デフォルト値入れる。
     //const inputtedText = ref("");
 
