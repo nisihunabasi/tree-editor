@@ -1,3 +1,8 @@
+/**
+ * フォルダツリーのオブジェクト表現。
+ * ツリー形式データ構造への変換と、それに対応した文字列表現の吐き出しの責務を持つ。
+ * 文法の整合性確認の責務も。
+ */
 export default class Tree {
     constructor(text, treeType = Tree.TREE_TYPE_SLIM) {
         this.inputtedText = text;
@@ -5,7 +10,8 @@ export default class Tree {
         this.setText(text);
     }
     setText(text) {
-        this.inputtedText = text;
+        //4スペもタブとみなす。
+        this.inputtedText = text.replace(/^\s{4}/mg, "\t");
         this.parseTree();
     }
     setType(type) {
@@ -18,12 +24,15 @@ export default class Tree {
     parseTree() {
         let rows = this.inputtedText.split("\n");
         //タブの数を見て罫線を入れる。
-        //TODO 最大長を計測して処理に反映する。
+        //TODO 最大長を計測して処理に反映する。コメントを入力できるようにするため。
         let tabNums = rows.map((row) => {
             let matched = row.match(/^\t+/);
             return (matched != null) ? matched[0].length : 0;
         });
+
         let treeTexts = [];
+        //ルートに当たる行の位置を調べ、それを基準にツリーになるブロックに分割する。
+        //インデントなしの行をルートとし、それにぶら下がっている行をまとめ、1要素とする。
         while (tabNums.length > 0) {
             let start = tabNums.indexOf(0);
             let end = tabNums.indexOf(0, start + 1);
