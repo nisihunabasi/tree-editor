@@ -1,7 +1,30 @@
-import Tree from "../src/models";
+import {Node, Tree} from "../src/models";
+
 
 test("hoge test", () => {
     expect(1 + 2).toBe(3);
+});
+
+test("node test", () => {
+    const node1 = new Node("hogehoge", true, true);
+    expect(node1.toString()).toBe("hogehoge");
+    const node2 = new Node("hugahuga");
+    expect(node2.toString()).toBe("├ hugahuga");
+    const node3 = new Node("hoga", true);
+    node2.addLeaf(node3);
+    node1.addLeaf(node2);
+    expect(node1.toString()).toBe(`
+hogehoge
+├ hugahuga
+   └ hoga
+`);
+});
+
+test("null tree", () => {
+    const testStr = "";
+    const expectStr = "";
+    const tr = new Tree(testStr, Tree.TREE_TYPE_SLIM);
+    expect(tr.getResult()).toBe(expectStr.trim());
 });
 
 test("basic tree", () => {

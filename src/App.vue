@@ -56,7 +56,7 @@
 <script>
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { ref } from "vue";
-import Tree from "./models.js";
+import {Tree} from "./models";
 
 export default {
   name: "App",
@@ -69,7 +69,7 @@ export default {
     const refResult = ref("Result here.");
     const refAnimateState = ref("");
 
-    const tree = new Tree("aaa", Tree.TREE_TYPE_WINDOWS);
+    const tree = new Tree("aaa", Tree.TREE_TYPE_SLIM);
     const onInputText = (e) => {
       refInput.value = e.target.value;
       tree.setText(refInput.value);
